@@ -9,9 +9,10 @@ defmodule PixelArt.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      PixelArtWeb.Endpoint
+      PixelArtWeb.Endpoint,
       # Starts a worker by calling: PixelArt.Worker.start_link(arg)
       # {PixelArt.Worker, arg},
+      {Registry, keys: :unique, name: PixelArt.CanvasRegistry}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

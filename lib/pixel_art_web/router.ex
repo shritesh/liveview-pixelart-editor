@@ -18,6 +18,7 @@ defmodule PixelArtWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    live "/:topic", CanvasLive
   end
 
   # Other scopes may use custom stacks.
