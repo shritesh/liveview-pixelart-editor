@@ -9,6 +9,7 @@
   </head>
   <body>
     <%= render @view_module, @view_template, assigns %>
+    <p><a href="https://github.com/shritesh/liveview-pixelart-editor">View Source</a></p>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
