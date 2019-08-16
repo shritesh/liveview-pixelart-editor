@@ -15,6 +15,8 @@ defmodule PixelArtWeb.CanvasLive do
     {:ok, canvas_pid} = get_canvas_pid(topic)
     canvas = Agent.get(canvas_pid, &Canvas.list/1)
 
+    if connected?(socket), do: PixelArtWeb.Endpoint.subscribe("canvas:" <> topic)
+
     {:ok,
      assign(socket, %{
        topic: topic,
@@ -41,11 +43,22 @@ defmodule PixelArtWeb.CanvasLive do
     [x, y] = coordinates |> String.split(",") |> Enum.map(&String.to_integer/1)
 
     Agent.update(socket.assigns.canvas_pid, &Canvas.put(&1, {x, y}, socket.assigns.current_color))
+
     canvas = Agent.get(socket.assigns.canvas_pid, &Canvas.list/1)
+    PixelArtWeb.Endpoint.broadcast("canvas:" <> socket.assigns.topic, "updated", %{})
+
     {:noreply, assign(socket, :canvas, canvas)}
   end
 
   def handle_event("change", %{"color" => color}, socket) do
     {:noreply, assign(socket, :current_color, color)}
+  end
+
+  def handle_info(
+        %{topic: "canvas:" <> topic, event: "updated"},
+        %{assigns: %{topic: topic}} = socket
+      ) do
+    canvas = Agent.get(socket.assigns.canvas_pid, &Canvas.list/1)
+    {:noreply, assign(socket, :canvas, canvas)}
   end
 end
