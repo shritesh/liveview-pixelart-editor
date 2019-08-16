@@ -1,7 +1,18 @@
 /* This file is for your main application css. */
 
-@import "./phoenix.css";
 @import "../../deps/phoenix_live_view/assets/css/live_view.css";
+
+body {
+    background-color: #333;
+    text-align: center;
+    margin: 0 auto;
+    color: #ccc;
+    font-family: monospace;
+}
+
+a {
+    color: #ccc;
+}
 
 .pixel {
     fill: var(--pixel-color);

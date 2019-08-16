@@ -28,6 +28,7 @@ defmodule PixelArtWeb.CanvasLive do
 
   def render(assigns) do
     ~L"""
+    <h1><%= @topic %></h1>
     <form phx-change="change">
       <input name="color" type="color" value="<%= @current_color %>" />
     </form>
