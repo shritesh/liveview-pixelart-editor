@@ -12,6 +12,8 @@ secret_key_base =
     """
 
 config :pixel_art, PixelArtWeb.Endpoint,
+  url: [scheme: "https", host: System.get_env("HOST"), port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
   secret_key_base: secret_key_base
 

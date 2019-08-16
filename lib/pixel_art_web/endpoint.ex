@@ -5,7 +5,7 @@ defmodule PixelArtWeb.Endpoint do
     websocket: true,
     longpoll: false
 
-  socket "/live", Phoenix.LiveView.Socket
+  socket "/live", Phoenix.LiveView.Socket, websocket: [timeout: 45_000]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -14,7 +14,7 @@ defmodule PixelArtWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :pixel_art,
-    gzip: false,
+    gzip: true,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
