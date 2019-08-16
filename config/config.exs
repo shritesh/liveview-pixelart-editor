@@ -12,7 +12,8 @@ config :pixel_art, PixelArtWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "Bh770JOLw9rcnm/QSihOXAIdmeJgi30ltvPSh//7ntR1G5WCszVDzE5cZFRnYwMQ",
   render_errors: [view: PixelArtWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: PixelArt.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: PixelArt.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [signing_salt: "fJJ5RTKalcms/YvoAIx+XhqTrzV8mDOR"]
 
 # Configures Elixir's Logger
 config :logger, :console,
